@@ -1,0 +1,758 @@
+/* ============ Shared app shell ============ */
+.app-shell {
+  position: relative;
+  min-height: 100svh;
+  overflow: hidden;
+}
+
+.app-fade {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(ellipse 70% 55% at 50% 30%, rgba(8, 11, 20, 0.35), rgba(8, 11, 20, 0.96) 78%);
+  pointer-events: none;
+}
+
+/* ---------- Top bar ---------- */
+.app-top {
+  position: sticky;
+  top: 0;
+  z-index: 40;
+  padding: 18px 0;
+  background: rgba(8, 11, 20, 0.62);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border-bottom: 1px solid rgba(35, 42, 72, 0.65);
+}
+
+.app-top-inner {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.app-back {
+  flex-shrink: 0;
+  width: 40px;
+  height: 40px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid var(--line);
+  border-radius: var(--radius-m);
+  color: var(--text-dim);
+  font-size: 1.05rem;
+  transition: border-color 0.18s ease, color 0.18s ease, transform 0.18s ease;
+}
+
+.app-back:hover {
+  color: var(--cyan);
+  border-color: var(--cyan);
+  transform: translateX(-2px);
+}
+
+.app-brand {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 1.02rem;
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  white-space: nowrap;
+}
+
+.app-brand .dot {
+  width: 9px;
+  height: 9px;
+  border-radius: 2px;
+  background: var(--cyan);
+  box-shadow: 0 0 12px 2px rgba(0, 230, 195, 0.6);
+}
+
+.app-actions {
+  margin-left: auto;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.btn-owned {
+  padding: 10px 18px;
+  font-size: 0.9rem;
+}
+
+/* ============ Mint page layout ============ */
+.app-main {
+  position: relative;
+  z-index: 1;
+  padding-top: 56px;
+  padding-bottom: 72px;
+  display: grid;
+  grid-template-columns: 0.92fr 1.08fr;
+  gap: 26px;
+  align-items: start;
+}
+
+.plot-panel {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+/* ---------- Plot switcher ---------- */
+.plot-switcher .section-tag {
+  margin-bottom: 10px;
+}
+
+.plot-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.chip {
+  font-family: var(--font-display);
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: var(--text-dim);
+  background: var(--panel);
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  padding: 8px 15px;
+  transition: border-color 0.18s ease, color 0.18s ease, background 0.18s ease;
+}
+
+.chip:hover {
+  color: var(--text);
+  border-color: rgba(0, 230, 195, 0.5);
+}
+
+.chip-active {
+  color: #04120F;
+  background: var(--cyan);
+  border-color: var(--cyan);
+  box-shadow: 0 6px 24px -8px rgba(0, 230, 195, 0.7);
+}
+
+/* ---------- Plot details card ---------- */
+.plot-card {
+  background: var(--panel);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-l);
+  padding: 28px;
+  position: relative;
+  overflow: hidden;
+}
+
+.plot-card::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle at 85% 0%, rgba(245, 185, 66, 0.14), transparent 55%);
+  pointer-events: none;
+}
+
+.plot-head {
+  position: relative;
+  display: flex;
+  justify-content: space-between;
+  gap: 14px;
+  align-items: flex-start;
+}
+
+.plot-status {
+  display: inline-block;
+  font-size: 0.72rem;
+  font-weight: 600;
+  padding: 4px 11px;
+  border-radius: 999px;
+  margin-bottom: 12px;
+}
+
+.plot-status.available {
+  color: var(--cyan);
+  background: rgba(0, 230, 195, 0.1);
+  border: 1px solid rgba(0, 230, 195, 0.45);
+}
+
+.plot-status.minted {
+  color: var(--gold);
+  background: rgba(245, 185, 66, 0.1);
+  border: 1px solid rgba(245, 185, 66, 0.45);
+}
+
+.plot-name {
+  font-size: clamp(1.35rem, 2.6vw, 1.8rem);
+  color: var(--text);
+}
+
+.plot-place {
+  color: var(--text-dim);
+  margin-top: 6px;
+  font-size: 0.95rem;
+}
+
+.plot-id-mon {
+  font-family: var(--font-display);
+  font-size: 0.8rem;
+  color: var(--text-dim);
+  white-space: nowrap;
+  border: 1px solid var(--line);
+  border-radius: var(--radius-s);
+  padding: 6px 10px;
+  background: rgba(8, 11, 20, 0.45);
+}
+
+/* ---------- Facts grid ---------- */
+.plot-facts {
+  position: relative;
+  margin: 24px 0 0;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
+
+.plot-facts > div {
+  background: rgba(8, 11, 20, 0.45);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-m);
+  padding: 12px 14px;
+}
+
+.plot-facts dt {
+  font-size: 0.72rem;
+  color: var(--text-dim);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  margin-bottom: 4px;
+}
+
+.plot-facts dd {
+  margin: 0;
+  font-family: var(--font-display);
+  font-size: 0.95rem;
+  font-weight: 600;
+}
+
+/* ---------- Price ---------- */
+.plot-price-row {
+  position: relative;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  gap: 16px;
+  margin-top: 22px;
+  padding-top: 22px;
+  border-top: 1px solid var(--line);
+}
+
+.plot-price-label {
+  display: block;
+  font-size: 0.76rem;
+  color: var(--text-dim);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  margin-bottom: 8px;
+}
+
+.plot-price {
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
+}
+
+.plot-price strong {
+  font-family: var(--font-display);
+  font-size: clamp(1.5rem, 3vw, 2rem);
+  color: var(--gold);
+}
+
+.plot-price span {
+  color: var(--text-dim);
+  font-weight: 600;
+}
+
+.plot-price-usd {
+  color: var(--text-dim);
+  font-size: 0.82rem;
+  margin-top: 4px;
+}
+
+.plot-sector {
+  text-align: right;
+  background: rgba(123, 92, 255, 0.08);
+  border: 1px solid rgba(123, 92, 255, 0.35);
+  border-radius: var(--radius-m);
+  padding: 12px 16px;
+}
+
+.plot-sector span {
+  display: block;
+  font-size: 0.72rem;
+  color: var(--text-dim);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  margin-bottom: 4px;
+}
+
+.plot-sector strong {
+  font-family: var(--font-display);
+  color: var(--violet);
+  font-size: 0.98rem;
+}
+
+/* ---------- Mint button + notes ---------- */
+.btn-mint {
+  position: relative;
+  width: 100%;
+  justify-content: center;
+  margin-top: 26px;
+  padding: 17px 24px;
+  font-size: 1.05rem;
+}
+
+.mint-note {
+  position: relative;
+  margin-top: 16px;
+  font-size: 0.82rem;
+  line-height: 1.6;
+  color: var(--gold);
+  border: 1px solid rgba(245, 185, 66, 0.4);
+  background: rgba(245, 185, 66, 0.06);
+  border-radius: var(--radius-m);
+  padding: 12px 14px;
+}
+
+.mint-receiver {
+  position: relative;
+  margin-top: 14px;
+  font-size: 0.82rem;
+  color: var(--text-dim);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border: 1px dashed var(--line);
+  border-radius: var(--radius-m);
+  padding: 10px 14px;
+}
+
+.mint-receiver code {
+  font-family: var(--font-display);
+  color: var(--cyan);
+  font-size: 0.9rem;
+}
+
+/* ---------- Map ---------- */
+.map-panel {
+  background: var(--panel);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-l);
+  padding: 22px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.map-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+}
+
+.map-head .section-tag {
+  margin: 0;
+}
+
+.map-hint {
+  color: var(--text-dim);
+  font-size: 0.78rem;
+}
+
+.map-controls {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.map-toggle {
+  display: inline-flex;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  padding: 3px;
+  background: rgba(8, 11, 20, 0.6);
+}
+
+.map-toggle-btn {
+  border: none;
+  background: transparent;
+  color: var(--text-dim);
+  font-size: 0.78rem;
+  font-weight: 600;
+  padding: 6px 14px;
+  border-radius: 999px;
+  transition: color 0.18s ease, background 0.18s ease;
+}
+
+.map-toggle-btn:hover { color: var(--text); }
+
+.map-toggle-active {
+  color: #04120F;
+  background: var(--cyan);
+  box-shadow: 0 4px 16px -6px rgba(0, 230, 195, 0.6);
+}
+
+.plot-map {
+  width: 100%;
+  height: clamp(380px, 54vh, 560px);
+  border-radius: var(--radius-m);
+  border: 1px solid var(--line);
+  background: #0b1222;
+  z-index: 0;
+}
+
+/* Leaflet theming */
+.leaflet-container {
+  font-family: var(--font-body);
+}
+
+.leaflet-bar {
+  border: 1px solid var(--line) !important;
+  box-shadow: none !important;
+  border-radius: var(--radius-s) !important;
+}
+
+.leaflet-bar a {
+  background: var(--panel);
+  color: var(--text);
+  border-bottom: 1px solid var(--line);
+}
+
+.leaflet-bar a:first-child { border-top-left-radius: var(--radius-s); border-top-right-radius: var(--radius-s); }
+.leaflet-bar a:last-child { border-bottom: none; border-bottom-left-radius: var(--radius-s); border-bottom-right-radius: var(--radius-s); }
+.leaflet-bar a:hover { background: var(--panel-raised); color: var(--cyan); }
+
+.leaflet-control-attribution {
+  background: rgba(8, 11, 20, 0.72) !important;
+  color: var(--text-dim) !important;
+  font-size: 0.66rem;
+}
+
+.leaflet-control-attribution a { color: var(--text-dim) !important; }
+
+.leaflet-popup-content-wrapper {
+  background: var(--panel-raised);
+  color: var(--text);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-m);
+  box-shadow: 0 18px 40px -12px rgba(0, 0, 0, 0.7);
+}
+
+.leaflet-popup-content {
+  font-family: var(--font-body);
+  font-size: 0.85rem;
+  line-height: 1.5;
+}
+
+.leaflet-popup-tip {
+  background: var(--panel-raised);
+  border: 1px solid var(--line);
+}
+
+.leaflet-popup-close-button { color: var(--text-dim) !important; }
+
+/* Custom gold pin (divIcon) */
+.plot-pin {
+  background: transparent;
+  border: none;
+}
+
+.plot-pin .pin-core {
+  display: block;
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  background: var(--gold);
+  box-shadow: 0 0 0 5px rgba(245, 185, 66, 0.2), 0 0 20px 5px rgba(245, 185, 66, 0.55);
+}
+
+/* ============ Owned plots page ============ */
+.owned-main {
+  position: relative;
+  z-index: 1;
+  padding-top: 56px;
+  padding-bottom: 72px;
+  display: grid;
+  grid-template-columns: 300px 1fr;
+  gap: 26px;
+  align-items: start;
+}
+
+.profile-card {
+  background: var(--panel);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-l);
+  padding: 30px 26px;
+  text-align: center;
+  position: sticky;
+  top: 110px;
+  overflow: hidden;
+}
+
+.profile-card::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle at 50% 0%, rgba(0, 230, 195, 0.1), transparent 60%);
+  pointer-events: none;
+}
+
+.profile-avatar {
+  width: fit-content;
+  margin: 0 auto 22px;
+}
+
+.jazzicon-wrap {
+  border-radius: 50%;
+  overflow: hidden;
+  border: 2px solid rgba(0, 230, 195, 0.55);
+  box-shadow: 0 0 0 6px rgba(0, 230, 195, 0.08), 0 14px 34px -12px rgba(0, 230, 195, 0.45);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--panel-raised);
+  position: relative;
+}
+
+.jazzicon-wrap .jazzicon-svg {
+  display: block;
+  border-radius: 50%;
+}
+
+.profile-card .section-tag {
+  position: relative;
+  margin-bottom: 8px;
+}
+
+.profile-name {
+  position: relative;
+  font-size: 1.25rem;
+  word-break: break-all;
+}
+
+.profile-sub {
+  position: relative;
+  color: var(--text-dim);
+  font-size: 0.85rem;
+  margin-top: 8px;
+  line-height: 1.5;
+}
+
+.profile-stats {
+  position: relative;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1px;
+  background: var(--line);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-m);
+  overflow: hidden;
+  margin-top: 22px;
+}
+
+.profile-stats > div {
+  background: rgba(8, 11, 20, 0.5);
+  padding: 14px 10px;
+}
+
+.profile-stats span {
+  display: block;
+  font-size: 0.7rem;
+  color: var(--text-dim);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  margin-bottom: 6px;
+}
+
+.profile-stats strong {
+  font-family: var(--font-display);
+  font-size: 1.02rem;
+  color: var(--gold);
+}
+
+.owned-panel .section-tag {
+  display: block;
+  margin-bottom: 20px;
+}
+
+.owned-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 18px;
+}
+
+.owned-card {
+  background: var(--panel);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-l);
+  padding: 22px;
+  position: relative;
+  overflow: hidden;
+  transition: border-color 0.18s ease, transform 0.18s ease;
+}
+
+.owned-card:hover {
+  border-color: rgba(245, 185, 66, 0.5);
+  transform: translateY(-2px);
+}
+
+.owned-card::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle at 90% 0%, rgba(245, 185, 66, 0.12), transparent 55%);
+  pointer-events: none;
+}
+
+.owned-card-head {
+  position: relative;
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  align-items: flex-start;
+}
+
+.owned-card-name {
+  font-size: 1.12rem;
+}
+
+.owned-card-place {
+  color: var(--text-dim);
+  font-size: 0.85rem;
+  margin-top: 5px;
+}
+
+.owned-card .plot-facts {
+  margin-top: 18px;
+}
+
+.owned-meta {
+  position: relative;
+  margin-top: 18px;
+  padding-top: 16px;
+  border-top: 1px solid var(--line);
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  font-size: 0.82rem;
+}
+
+.owned-meta > div {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+}
+
+.owned-meta span {
+  color: var(--text-dim);
+  font-size: 0.76rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.owned-meta time { color: var(--text); }
+.owned-meta code {
+  font-family: var(--font-display);
+  font-size: 0.82rem;
+  color: var(--cyan);
+}
+
+.owned-meta strong {
+  font-family: var(--font-display);
+  color: var(--gold);
+  font-size: 0.92rem;
+}
+
+.owned-meta strong em {
+  color: var(--text-dim);
+  font-style: normal;
+  font-size: 0.78rem;
+  font-weight: 400;
+}
+
+/* ============ Responsive ============ */
+@media (max-width: 1080px) {
+  .owned-grid { grid-template-columns: 1fr; }
+}
+
+@media (max-width: 920px) {
+  .app-main {
+    grid-template-columns: 1fr;
+    gap: 22px;
+  }
+
+  .map-panel { order: -1; }
+
+  .owned-main {
+    grid-template-columns: 1fr;
+  }
+
+  .profile-card {
+    position: static;
+    padding: 24px;
+  }
+
+  .profile-avatar {
+    margin: 0 auto 18px;
+  }
+}
+
+@media (max-width: 640px) {
+  .app-top { padding: 12px 0; }
+
+  .app-actions { gap: 6px; }
+
+  .btn-owned {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 9px 12px;
+    font-size: 0.82rem;
+  }
+
+  .app-main {
+    padding-top: 36px;
+    padding-bottom: 48px;
+  }
+
+  .plot-card { padding: 20px; }
+
+  .plot-facts { grid-template-columns: 1fr; }
+
+  .plot-price-row {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .plot-sector { text-align: left; }
+
+  .plot-map {
+    height: 320px;
+  }
+
+  .map-head {
+    flex-wrap: wrap;
+  }
+
+  .map-panel { padding: 14px; }
+
+  .map-hint { display: none; }
+
+  .owned-main {
+    padding-top: 36px;
+    padding-bottom: 48px;
+    gap: 20px;
+  }
+
+  .owned-card { padding: 18px; }
+}
