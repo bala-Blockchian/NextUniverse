@@ -310,6 +310,13 @@
   font-size: 1.05rem;
 }
 
+.btn-mint:disabled {
+  opacity: 0.6;
+  cursor: wait;
+  transform: none;
+  box-shadow: none;
+}
+
 .mint-note {
   position: relative;
   margin-top: 16px;

@@ -61,8 +61,8 @@ token id
 
 things to be done
 
-update the ui for app minting page 
-add the connect functionality using the rainbow kit 
+update the ui for app minting page - done 
+add the connect functionality using the rainbow kit - done
 create the backend for the mint functionality 
 cretae the smart contract 
 depply the contrcat on the sepolia 
@@ -70,5 +70,64 @@ depply the contrcat on the sepolia
 
 
 
+create the nft based smart contract
+init the foundry project
+
+create a simple nft contract for this name is nextuniverse - done 
 
 
+deploy to the sepolia testnet - done 
+
+
+
+init a express projext folder name backend 
+insatll the express lib 
+create the post request for the mint button 
+
+
+
+
+
+
+that takes the follofing parameter :
+
+{
+    id: 'NX-0001',
+    name: 'Marina Reach',
+    place: 'Marina Beach, Chennai',
+    sector: 'Sector 7',
+    lat: 13.05,
+    lng: 80.2824,
+    priceBdx: 2400,
+    priceUsd: 120,
+    areaSqm: 250,
+    size: '16m × 16m',
+    zoom: 16,
+  }
+
+
+//generate the metedata 
+//upload the file to the pinata 
+
+
+API Key: 0b4e77e444fcc32c3262
+API Secret: 77844af44e7ad741046caea76268ba7d08a021d3a8b52110f669f13d2361340b
+JWT: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySW5mb3JtYXRpb24iOnsiaWQiOiI1MDhlNGZmMS05NWU0LTQwZGYtOWI3MS05N2I0NWIyZTNjZDUiLCJlbWFpbCI6ImJhbGFtdXJ1Z2FubmFnYXJhamFuLnZtQGdtYWlsLmNvbSIsImVtYWlsX3ZlcmlmaWVkIjp0cnVlLCJwaW5fcG9saWN5Ijp7InJlZ2lvbnMiOlt7ImRlc2lyZWRSZXBsaWNhdGlvbkNvdW50IjoxLCJpZCI6IkZSQTEifSx7ImRlc2lyZWRSZXBsaWNhdGlvbkNvdW50IjoxLCJpZCI6Ik5ZQzEifV0sInZlcnNpb24iOjF9LCJtZmFfZW5hYmxlZCI6ZmFsc2UsInN0YXR1cyI6IkFDVElWRSJ9LCJhdXRoZW50aWNhdGlvblR5cGUiOiJzY29wZWRLZXkiLCJzY29wZWRLZXlLZXkiOiIwYjRlNzdlNDQ0ZmNjMzJjMzI2MiIsInNjb3BlZEtleVNlY3JldCI6Ijc3ODQ0YWY0NGU3YWQ3NDEwNDZjYWVhNzYyNjhiYTdkMDhhMDIxZDNhOGI1MjExMGY2NjlmMTNkMjM2MTM0MGIiLCJleHAiOjE4MjEyMjAwNjV9.QVG2RcHy0qfiMe48E7xH0WOfA2jMMp8IYCGYNV3dZyY
+
+//get the token uri 
+
+//make a tranfer of 0.00001 sepolia ether 
+// if success then proceed to this step 
+//call the mint function 
+network paramters :
+
+ --rpc-url https://ethereum-sepolia-rpc.publicnode.com \
+  --private-key fa714016d8fd9e2e29ccc5833ceeb8fbf0f3c2ad2d3d4405cee410667896b535 \
+
+//contract address : 0x6da4fA6491162ffcf194aE04a210bbb4dd9a38BD
+function mintNft(string memory tokenUri) public onlyOwner {
+        s_tokenIdToUri[s_tokenCounter] = tokenUri;
+        _safeMint(msg.sender, s_tokenCounter);
+        s_tokenCounter = s_tokenCounter + 1;
+    }
+//

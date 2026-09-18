@@ -4,18 +4,28 @@ import { BrowserRouter } from 'react-router-dom';
 import { WagmiProvider } from 'wagmi';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { RainbowKitProvider, darkTheme, getDefaultConfig } from '@rainbow-me/rainbowkit';
+import { injectedWallet, metaMaskWallet } from '@rainbow-me/rainbowkit/wallets';
 import { mainnet, sepolia } from 'wagmi/chains';
 import '@rainbow-me/rainbowkit/styles.css';
 import App from './App.jsx';
 import './styles/tailwind.css';
 import './styles/global.css';
 
-// Create a WalletConnect Cloud project at https://cloud.walletconnect.com and
-// set VITE_WALLETCONNECT_PROJECT_ID in a .env file to enable full wallet list.
+// Only injected-based wallets are enabled. WalletConnect-family wallets require a
+// real WalletConnect Cloud project id; with an invalid one their `isAuthorized()`
+// throws during wagmi's automatic reconnect, which leaves the connection stuck in a
+// "reconnecting" state with a stale connector. Add them back once you have a valid
+// VITE_WALLETCONNECT_PROJECT_ID.
 const config = getDefaultConfig({
   appName: 'Next Universe',
-  projectId: import.meta.env.VITE_WALLETCONNECT_PROJECT_ID || 'YOUR_WALLETCONNECT_PROJECT_ID',
+  projectId: import.meta.env.VITE_WALLETCONNECT_PROJECT_ID || 'local-dev',
   chains: [sepolia, mainnet],
+  wallets: [
+    {
+      groupName: 'Recommended',
+      wallets: [metaMaskWallet, injectedWallet],
+    },
+  ],
 });
 
 const queryClient = new QueryClient();

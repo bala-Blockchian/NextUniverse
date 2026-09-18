@@ -206,7 +206,7 @@ function Footer() {
               <span className="icon">✉</span>
               <a href="mailto:balamurugannagarajan.vm@gmail.com">balamurugannagarajan.vm@gmail.com</a>
             </div>
-            <p className="footer-creator">Created by <strong>Balamurugan Nagarajan</strong></p>
+            <p className="footer-creator">Our Founder <strong>Karthic A</strong></p>
           </div>
         </div>
         <div className="footer-bottom">
@@ -216,3 +216,7 @@ function Footer() {
     </footer>
   );
 }
+
+
+
+//update the 

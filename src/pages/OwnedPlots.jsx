@@ -1,7 +1,6 @@
 import { Link } from 'react-router-dom';
 import { useAccount } from 'wagmi';
 import { ConnectButton } from '@rainbow-me/rainbowkit';
-import GridField from '../components/GridField.jsx';
 import JazziconAvatar from '../components/JazziconAvatar.jsx';
 import { OWNED_PLOTS, shorten } from '../data/plots.js';
 import '../styles/app.css';
@@ -12,7 +11,6 @@ export default function OwnedPlots() {
 
   return (
     <div className="app-shell">
-      {/* <GridField dense /> */}
       <div className="app-fade" />
 
       <header className="app-top">
