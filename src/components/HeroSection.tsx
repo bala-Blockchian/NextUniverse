@@ -7,11 +7,11 @@ import GridPulseBackground from './GridPulseBackground.tsx';
 // Content
 // ---------------------------------------------------------------------------
 
-const HEADLINE = 'Where Real-World Coordinates Meet On-Chain Reality.';
+const HEADLINE = 'Own the Future of the Metaverse, Powered by Crypto.';
 
 // Words in this set get the cyan → blue gradient treatment. Everything else
 // renders in plain white so the gradient reads as emphasis, not decoration.
-const GRADIENT_WORDS = new Set(['On-Chain', 'Reality.']);
+const GRADIENT_WORDS = new Set(['Metaverse,', 'Crypto.']);
 
 interface ParcelPin {
   id: string;
