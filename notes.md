@@ -122,7 +122,7 @@ JWT: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySW5mb3JtYXRpb24iOnsiaWQiOiI1MD
 network paramters :
 
  --rpc-url https://ethereum-sepolia-rpc.publicnode.com \
-  --private-key fa714016d8fd9e2e29ccc5833ceeb8fbf0f3c2ad2d3d4405cee410667896b535 \
+  --private-key \
 
 //contract address : 0x6da4fA6491162ffcf194aE04a210bbb4dd9a38BD
 function mintNft(string memory tokenUri) public onlyOwner {
@@ -131,3 +131,66 @@ function mintNft(string memory tokenUri) public onlyOwner {
         s_tokenCounter = s_tokenCounter + 1;
     }
 //
+
+
+
+thing to be done :
+
+
+remove the metamask connect from the code base 
+update the price of every plot to be 200 bdx 
+when the user clicks on the mint the plot button 
+
+dont make a external call to the post api or remive the exsiting login when clicking on the mint button 
+as of now dont make any external api calls 
+
+there should be a popup with two progressive bars
+ one showing the beldex receiver address with the copy button and qr code 
+
+  use this code 
+
+ export async function generateBeldexQrDataUrl(address, amount, description = "") {
+  const uri = buildBeldexUri(address, amount, description);
+  return QRCode.toDataURL(uri, { margin: 1, width: 260 });
+}
+
+ and two more input bocx for the tx hash of the payment and the eth wallet addresss with the description as where the nft will be minted 
+
+ once the user have pasted the tx hash and the eth dattess check the formate 
+ and do this verification 
+
+ use this logic for the verification code :
+
+ export async function verifyTxTimestamp(txHash, maxDiffSeconds = 500) {
+  try {
+    const explorerUrl = `https://explorer.beldex.io/tx/${txHash}`;
+    const response = await fetch(explorerUrl);
+
+    if (!response.ok) {
+      return { ok: false, reason: "not-found" };
+    }
+
+    const htmlText = await response.text();
+    const doc = new DOMParser().parseFromString(htmlText, "text/html");
+
+    const spanElement = doc.querySelector('span[title^="Unix timestamp:"]');
+    if (!spanElement) {
+      return { ok: false, reason: "not-found" };
+    }
+
+    const titleAttr = spanElement.getAttribute("title");
+    const txUnixTime = parseInt(titleAttr.replace("Unix timestamp:", "").trim(), 10);
+    const currentUnixTime = Math.floor(Date.now() / 1000);
+    const timeDiff = Math.abs(currentUnixTime - txUnixTime);
+
+    return { ok: timeDiff <= maxDiffSeconds, reason: timeDiff <= maxDiffSeconds ? null : "too-old" };
+  } catch (err) {
+    // Most likely a CORS block or offline network — not proof the hash is invalid.
+    return { ok: false, reason: "network" };
+  }
+}
+
+
+ in the second progressive bar tab :
+ 
+
